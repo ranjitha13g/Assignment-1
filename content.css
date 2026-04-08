@@ -1,0 +1,389 @@
+/* ─── TextVault Floating Save Dialog ──────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+#textvault-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 2147483646;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#textvault-overlay.tv-visible {
+  opacity: 1;
+}
+
+#textvault-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  z-index: 2147483647;
+  width: 420px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e4e4e7;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#textvault-dialog.tv-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+
+.tv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tv-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.tv-header-title .tv-logo {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+.tv-close-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.tv-close-btn:hover {
+  background: rgba(233, 69, 96, 0.2);
+  color: #e94560;
+}
+
+/* ─── Preview ─────────────────────────────────────────────────────────────── */
+
+.tv-preview {
+  margin: 14px 22px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border-left: 3px solid #e94560;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #c8c8d0;
+  max-height: 100px;
+  overflow-y: auto;
+  word-break: break-word;
+}
+
+.tv-preview::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tv-preview::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.tv-source-url {
+  margin: 0 22px 14px;
+  font-size: 11px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tv-source-url span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Heading Input ───────────────────────────────────────────────────────── */
+
+.tv-heading-row {
+  margin: 6px 22px 14px;
+}
+
+.tv-heading-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #e4e4e7;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+  letter-spacing: -0.2px;
+}
+
+.tv-heading-input::placeholder {
+  color: #555;
+  font-weight: 400;
+}
+
+.tv-heading-input:focus {
+  border-color: rgba(233, 69, 96, 0.5);
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+}
+
+/* ─── File List ───────────────────────────────────────────────────────────── */
+
+.tv-section-label {
+  padding: 0 22px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.tv-file-list {
+  margin: 0 14px;
+  max-height: 150px;
+  min-height: 50px;
+  overflow-y: auto;
+  padding-right: 4px;
+  flex-shrink: 1;
+}
+
+.tv-file-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tv-file-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.tv-file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.tv-file-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tv-file-item.tv-selected {
+  background: rgba(233, 69, 96, 0.12);
+  border-color: rgba(233, 69, 96, 0.3);
+}
+
+.tv-file-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tv-file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.tv-file-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e4e4e7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tv-file-meta {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.tv-empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* ─── New File Input ──────────────────────────────────────────────────────── */
+
+.tv-new-file-row {
+  display: flex;
+  gap: 8px;
+  margin: 12px 22px 0;
+}
+
+.tv-new-file-input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #e4e4e7;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.tv-new-file-input::placeholder {
+  color: #555;
+}
+
+.tv-new-file-input:focus {
+  border-color: rgba(233, 69, 96, 0.5);
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+}
+
+.tv-new-file-btn {
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #c8c8d0;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tv-new-file-btn:hover {
+  background: rgba(233, 69, 96, 0.15);
+  border-color: rgba(233, 69, 96, 0.3);
+  color: #e94560;
+}
+
+/* ─── Footer / Save Button ────────────────────────────────────────────────── */
+
+.tv-footer {
+  padding: 16px 22px 20px;
+  margin-top: 12px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.tv-save-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #e94560 0%, #c23152 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(233, 69, 96, 0.3);
+}
+
+.tv-save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(233, 69, 96, 0.4);
+}
+
+.tv-save-btn:active {
+  transform: translateY(0);
+}
+
+.tv-save-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ─── Toast ───────────────────────────────────────────────────────────────── */
+
+#textvault-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2147483647;
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  border-radius: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e4e4e7;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+#textvault-toast.tv-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#textvault-toast .tv-toast-icon {
+  font-size: 18px;
+}

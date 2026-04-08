@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TextVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="header-logo">📌</div>
+        <div>
+          <h1 class="header-title">TextVault</h1>
+          <p class="header-subtitle">Your highlighted notes</p>
+        </div>
+      </div>
+      <div class="header-stats" id="header-stats"></div>
+    </header>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="notes" id="tab-notes">📝 Notes</button>
+      <button class="tab-btn" data-tab="files" id="tab-files">📁 Files</button>
+    </div>
+
+    <!-- Notes View -->
+    <div class="tab-content active" id="content-notes">
+      <div class="filter-bar">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="search-input" placeholder="Search notes..." />
+        </div>
+        <select class="file-filter" id="file-filter">
+          <option value="__all__">All Files</option>
+        </select>
+      </div>
+      <div class="notes-list" id="notes-list"></div>
+    </div>
+
+    <!-- Files View -->
+    <div class="tab-content" id="content-files">
+      <div class="create-file-row">
+        <input type="text" class="create-file-input" id="create-file-input" placeholder="New file name..." />
+        <button class="create-file-btn" id="create-file-btn">+ Create</button>
+      </div>
+      <div class="files-list" id="files-list"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
