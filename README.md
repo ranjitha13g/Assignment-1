@@ -16,6 +16,8 @@ While browsing the web — reading articles, research papers, documentation, or 
 
 ---
 
+[**Watch on YouTube**](https://youtu.be/TvP6ANnJm8c?si=-hi-_RNPHUatYlJi)
+
 ## ✨ Features
 
 | Feature | Description |
